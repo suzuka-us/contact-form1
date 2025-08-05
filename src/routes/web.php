@@ -2,17 +2,42 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
+// お問い合わせフォーム入力ページ
 Route::get('/', function () {
-    return view('welcome');
+    return view('index'); // resources/views/index.blade.phpを表示
+});
+
+// お問い合わせフォーム確認ページ（POSTで送られてくる想定）
+Route::post('/confirm', function () {
+    return view('confirm');
+});
+
+// サンクスページ（送信後の表示）
+Route::post('/thanks', function () {
+    return view('thanks');
+});
+
+// 管理画面
+Route::get('/admin', function () {
+    return view('admin');
+});
+
+// ユーザ登録ページ（GET）
+Route::get('/register', function () {
+    return view('register');
+});
+
+// ユーザ登録処理（POST）
+Route::post('/register', function () {
+    // 登録処理を書く
+});
+
+// ログインページ（GET）
+Route::get('/login', function () {
+    return view('login');
+});
+
+// ログイン処理（POST）
+Route::post('/login', function () {
+    // ログイン処理を書く
 });
