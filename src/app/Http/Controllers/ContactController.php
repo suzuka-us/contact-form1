@@ -15,6 +15,6 @@ class ContactController extends Controller
    {
          // ここに処理を記述していきます。
          $contact = $request->only(['name', 'email', 'tel', 'content']);
-         return $contact;
+         return view('confirm', compact('contact'));
      }
 }
