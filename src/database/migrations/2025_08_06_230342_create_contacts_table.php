@@ -6,26 +6,32 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('contacts', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-     $table->string('email');
-     $table->string('tel', 11);
-     $table->text('content')->nullable();
-            $table->timestamps();
+        Schema::table('contacts', function (Blueprint $table) {
+            $table->string('last_name')->after('id');
+            $table->string('first_name')->after('last_name');
+            $table->string('gender')->after('first_name');
+            $table->string('address')->after('tel');
+            $table->string('building')->nullable()->after('address');
+            $table->unsignedBigInteger('category_id')->after('building');
+
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('contacts');
+        Schema::table('contacts', function (Blueprint $table) {
+            $table->dropForeign(['category_id']);
+            $table->dropColumn([
+                'last_name',
+                'first_name',
+                'gender',
+                'address',
+                'building',
+                'category_id'
+            ]);
+        });
     }
 };

@@ -3,28 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactRequest;
+use App\Models\Category;
 use App\Models\Contact;
 
 class ContactController extends Controller
 {
-  public function index()
-  {
-    return view('index');
-  }
+    public function index()
+    {
+        $categories = Category::all();
+        return view('index', compact('categories'));
+    }
 
-  public function confirm(ContactRequest $request)
-   {
-         // ここに処理を記述していきます。
-         $contact = $request->only(['name', 'email', 'tel', 'content']);
-         return view('confirm', compact('contact'));
-     }
-     public function store(ContactRequest $request)
+    public function confirm(ContactRequest $request)
+    {
+        $contact = $request->all();
+        return view('confirm', compact('contact'));
+    }
 
-  {
-     // ここに処理を記述していきます。
-       $contact = $request->only(['name', 'email', 'tel', 'content']);
-       Contact::create($contact);
-       return view('thanks');
-
-   }
+    public function store(ContactRequest $request)
+    {
+        Contact::create($request->validated());
+        return redirect()->route('thanks');
+    }
 }
