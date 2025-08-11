@@ -1,3 +1,5 @@
+<?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
@@ -6,10 +8,11 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class AdminController extends Controller
 {
-    public function index(Request $request)
+    /**
+     * 検索条件適用（一覧・エクスポート共通）
+     */
+    private function applyFilters($query, Request $request)
     {
-        $query = Contact::query();
-
         // 1. 名前（部分一致・フルネーム対応）
         if ($request->filled('name')) {
             $name = $request->input('name');
@@ -22,8 +25,7 @@ class AdminController extends Controller
 
         // 2. メールアドレス
         if ($request->filled('email')) {
-            $email = $request->input('email');
-            $query->where('email', 'like', "%{$email}%");
+            $query->where('email', 'like', "%{$request->email}%");
         }
 
         // 3. 性別
@@ -44,33 +46,43 @@ class AdminController extends Controller
             $query->whereDate('created_at', '<=', $request->date_to);
         }
 
+        return $query;
+    }
+
+    /**
+     * 管理画面一覧（検索＆ページネーション）
+     */
+    public function index(Request $request)
+    {
+        $query = $this->applyFilters(Contact::query(), $request);
         $contacts = $query->paginate(7)->withQueryString();
 
         return view('admin.contacts.index', compact('contacts'));
     }
 
-    // 詳細表示（モーダル用JSON返却）
+    /**
+     * 詳細表示（モーダル用JSON返却）
+     */
     public function show(Contact $contact)
     {
         return response()->json($contact);
     }
 
-    // 削除処理
+    /**
+     * 削除処理
+     */
     public function destroy(Contact $contact)
     {
         $contact->delete();
         return response()->json(['message' => '削除しました']);
     }
 
-    // CSVエクスポート
+    /**
+     * CSVエクスポート（検索条件適用）
+     */
     public function export(Request $request): StreamedResponse
     {
-        $query = Contact::query();
-
-        // 検索条件はindexと同じ処理で再利用可能にしても良いです。
-        // 省略しますが、$requestの検索条件をここでも適用してください。
-
-        $contacts = $query->get();
+        $contacts = $this->applyFilters(Contact::query(), $request)->get();
 
         $headers = [
             'Content-Type' => 'text/csv',

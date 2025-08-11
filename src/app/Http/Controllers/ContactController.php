@@ -20,9 +20,15 @@ class ContactController extends Controller
         return view('confirm', compact('contact'));
     }
 
-    public function store(ContactRequest $request)
-    {
-        Contact::create($request->validated());
-        return redirect()->route('thanks');
-    }
+   public function store(Request $request)
+{
+$contact = $request->only(['name', 'email', 'tel', 'content']);
+Contact::create($contact);
+     return view('thanks');
+}
+
+
+
+
+    
 }
