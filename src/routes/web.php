@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\AdminController;
+
 
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/', [ContactController::class, 'index'])->name('contacts.index');
