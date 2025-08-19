@@ -8,14 +8,18 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::table('contacts', function (Blueprint $table) {
-            $table->string('last_name')->after('id');
-            $table->string('first_name')->after('last_name');
-            $table->string('gender')->after('first_name');
-            $table->string('address')->after('tel');
-            $table->string('building')->nullable()->after('address');
-            $table->unsignedBigInteger('category_id')->after('building');
+        Schema::create('contacts', function (Blueprint $table) {
+            $table->string('last_name');
+            $table->string('first_name');
+            $table->string('gender');
+            $table->string('address');
+            $table>string('tel');
 
+            $table->string('building');
+            $table->unsignedBigInteger('category_id');
+
+
+           
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
