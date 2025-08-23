@@ -13,7 +13,7 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('gender');
             $table->string('address');
-            $table>string('tel');
+            $table->string('tel');
 
             $table->string('building');
             $table->unsignedBigInteger('category_id');
