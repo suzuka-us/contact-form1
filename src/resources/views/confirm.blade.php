@@ -89,6 +89,11 @@
       </table>
     </div>
 
+
+    <!-- hidden input をフォームに追加 フォーム内のどこでもOK 、テーブルの外で送信ボタンの直前に置くのが一般的-->
+    <input type="hidden" name="category_id" value="{{ $contact['category_id'] }}" />
+
+
     <div class="form__button">
       <button class="form__button-submit" type="submit">送信</button>
     </div>
