@@ -83,8 +83,9 @@
         <tr class="confirm-table__row">
           <th class="confirm-table__header">お問い合わせ内容</th>
           <td class="confirm-table__text">
-            <textarea name="content" readonly>{{ $contact['content'] }}</textarea>
-          </td>
+      <!-- ここに class="confirm-table__textarea" を追加 -->
+        <textarea name="content" class="confirm-table__textarea" readonly>{{ $contact['content'] }}</textarea>
+  </td>
         </tr>
       </table>
     </div>
