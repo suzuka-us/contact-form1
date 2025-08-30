@@ -145,6 +145,8 @@
         <select name="category_id">
           <option value="">選択してください</option>
           @foreach($categories as $category)
+         
+          <!-- confirm.blade.phpに送るid -->
             <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
               {{ $category->name }}
             </option>
