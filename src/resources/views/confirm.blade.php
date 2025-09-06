@@ -51,10 +51,14 @@
         <tr class="confirm-table__row">
           <th class="confirm-table__header">電話番号</th>
           <td class="confirm-table__text">
-            <input type="tel" name="tel" value="{{ $contact['tel'] }}" readonly />
-          </td>
+            <input type="tel" name="tel_1" value="{{ $contact['tel_1'] ?? '' }}" readonly />
+            <input type="tel" name="tel_2" value="{{ $contact['tel_2'] ?? '' }}" readonly />
+            <input type="tel" name="tel_3" value="{{ $contact['tel_3'] ?? '' }}" readonly />
         </tr>
 
+       
+       
+       
         <!-- 住所 -->
         <tr class="confirm-table__row">
           <th class="confirm-table__header">住所</th>

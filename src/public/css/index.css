@@ -69,3 +69,25 @@
     color: #fff;
     cursor: pointer;
 }
+/* スペースを追加 */
+.contact-form__content{
+          display: flex;
+          gap: 2rem;
+}
+
+.form__group-title{
+    min-width: 14rem;
+    text-align: left;
+}
+
+.form__group-content{
+    width: 100%;
+}
+
+.form__input--text{
+    width: 100%;
+}
+
+
+
+

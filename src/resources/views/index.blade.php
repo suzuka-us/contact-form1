@@ -14,39 +14,30 @@
   <form class="form" action="{{ route('contacts.confirm') }}" method="post">
     @csrf
 
-    {{-- 姓 --}}
+    {{-- お名前 --}}
     <div class="form__group">
       <div class="form__group-title">
-        <span class="form__label--item">姓</span>
+        <span class="form__label--item">お名前</span>
         <span class="form__label--required">必須</span>
       </div>
-      <div class="form__group-content">
+      <div class="form__group-content name-comtent">
         <div class="form__input--text">
-          <input type="text" name="last_name" placeholder="姓を入力してください" value="{{ old('last_name') }}">
+          <input type="text" name="last_name" placeholder="例: 山田" value="{{ old('last_name') }}">
+         
+          <div class="form__error">
+          @error('last_name')
+            {{ $message }}
+          @enderror
         </div>
+       
+      </div>
+        <input type="text" name="first_name" placeholder="例: 太郎" value="{{ old('first_name') }}">
         <div class="form__error">
           @error('last_name')
             {{ $message }}
           @enderror
         </div>
-      </div>
-    </div>
 
-    {{-- 名 --}}
-    <div class="form__group">
-      <div class="form__group-title">
-        <span class="form__label--item">名</span>
-        <span class="form__label--required">必須</span>
-      </div>
-      <div class="form__group-content">
-        <div class="form__input--text">
-          <input type="text" name="first_name" placeholder="名を入力してください" value="{{ old('first_name') }}">
-        </div>
-        <div class="form__error">
-          @error('first_name')
-            {{ $message }}
-          @enderror
-        </div>
       </div>
     </div>
 

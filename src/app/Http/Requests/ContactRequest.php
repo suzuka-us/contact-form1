@@ -13,7 +13,10 @@ class ContactRequest extends FormRequest
         'first_name' => 'required|string|max:50',
         'gender' => 'required|in:male,female,other',
         'email' => 'required|email',
-        'tel' => 'required|digits_between:5,11|numeric',
+        // telを追加
+        'tel_1' => 'required|digits_between:5,11|numeric',
+        'tel_2' => 'required|digits_between:5,11|numeric',
+        'tel_3' => 'required|digits_between:5,11|numeric',
         'address' => 'required|string|max:255',
         'building' => 'nullable|string|max:255',
         'category_id' => 'nullable|exists:categories,id', // ← required を nullable に変更
